@@ -12,7 +12,9 @@ class LoadPictureView extends React.Component {
 		this.state = {
 			componentSelected: false,
 			pictureData: {
-				file: null
+				file: null,
+				width: null,
+				height: null
 			},
 			currentComponent: null
 		};
@@ -28,10 +30,13 @@ class LoadPictureView extends React.Component {
 		});
 	}
 
-	setImage(val) {
+	setImage(val, image) {
+		console.log(image);
 		this.setState({
 			pictureData: {
 				file: val,
+				width: image.width,
+				height: image.height
 			},
 			currentComponent: Constants.PictureComponent.Machine
 		});
@@ -51,7 +56,7 @@ class LoadPictureView extends React.Component {
 					component = <UploadPictureForm setImage={this.setImage} />;
 					break;
 				case Constants.PictureComponent.Machine:
-					component = <PaintPictureComponent imagePreview={this.state.pictureData.file} />
+					component = <PaintPictureComponent imagePreview={this.state.pictureData} />
 					break;
 				default:
 					break;
