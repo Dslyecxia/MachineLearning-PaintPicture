@@ -12,15 +12,16 @@ class PaintPictureComponent extends React.Component {
 
 		this.state = {
 			isStarted: false,
+			isPaused: false,
 			iteration: 0
 		};
 
-		this.toggleTraining = this.toggleTraining.bind(this);
+		this.startTraining = this.startTraining.bind(this);
 		this.generateOutputCanvas = this.generateOutputCanvas.bind(this);
 		this.updateIteration = this.updateIteration.bind(this);
 	}
 
-	toggleTraining() {
+	startTraining() {
 		if(!this.state.isStarted){
 			this.setState({
 				isStarted: !this.state.isStarted
@@ -56,13 +57,13 @@ class PaintPictureComponent extends React.Component {
 		if(isStarted){
 			component  = <IterationView numIterations={iteration} />
 		} else {
-			component  = <TrainingButton toggleTraining={this.toggleTraining} />
+			component  = <TrainingButton startTraining={this.startTraining} />
 		}
 
 		return (
 			<div>
 				<div>
-					<img src={this.props.imagePreview.file} ref="uploaded" width={this.props.imagePreview.width} height={this.props.imagePreview.height} />
+					<img src={this.props.imagePreview.file} ref="uploaded" width={this.props.imagePreview.width} height={this.props.imagePreview.height} alt="" />
 				</div>
 				<div>
 					<canvas ref="output" width={this.props.imagePreview.width} height={this.props.imagePreview.height} />

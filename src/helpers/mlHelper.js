@@ -11,7 +11,6 @@ let Constants = {
 }
 
 function getData(inputImgData, outputCtx){
-	debugger;
 	outputCtx.drawImage(inputImgData, 0, 0);
 
 	var imageData = outputCtx.getImageData(0, 0, Constants.PictureData.Width, Constants.PictureData.Height);
@@ -60,7 +59,6 @@ function pixel(data,x,y){
 export function train(outputCtx, inputImgData,  imageTrueWidth, imageTrueHeight, updateIteration){
 	Constants.PictureData.Width = imageTrueWidth;
 	Constants.PictureData.Height = imageTrueHeight;
-	console.log(Constants.PictureData.Width);
 	const spiriaTron = new Architect.Perceptron(Constants.Machine.NumInputLayers, Constants.Machine.NumHiddenLayers, Constants.Machine.NumOutputLayers);
 	let iteration = 0;
 	let outputData = getData(inputImgData, outputCtx);

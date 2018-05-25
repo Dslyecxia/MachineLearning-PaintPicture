@@ -11,7 +11,7 @@ const Constants = {
 	},
 	Machine: {
 		NumInputLayers: 2,
-		NumHiddenLayers: 30,
+		NumHiddenLayers: 12,
 		NumOutputLayers: 3
 	}
 };

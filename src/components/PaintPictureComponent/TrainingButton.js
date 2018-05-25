@@ -4,7 +4,7 @@ class TrainingButton extends React.Component {
   	render() {
 		return (
 			<div>
-				<button onClick={this.props.toggleTraining.bind(this)}>
+				<button onClick={this.props.startTraining.bind(this)}>
 					Draw me like one of your french girls
 				</button>
 			</div>

@@ -9,7 +9,11 @@ class WebcamForm extends React.Component {
 
 	capture = () => {
 		const imageSrc = this.webcam.getScreenshot();
-		this.props.setImage(imageSrc, {width: Constants.PictureData.Width, height: Constants.PictureData.Height});
+		let image = new Image();
+		image.src = imageSrc;
+		image.onload = () => {
+		  	this.props.setImage(imageSrc, {width: image.width, height: image.height});
+		}
 	};
 
   	render() {	    
