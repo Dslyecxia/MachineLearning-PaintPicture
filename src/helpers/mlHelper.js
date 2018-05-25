@@ -6,11 +6,12 @@ let Constants = {
 	PictureData: {
 		Width: 0,
 		Height: 0,
-		Format: "image/jpeg"
+		Format: "image/png"
 	}
 }
 
 function getData(inputImgData, outputCtx){
+	debugger;
 	outputCtx.drawImage(inputImgData, 0, 0);
 
 	var imageData = outputCtx.getImageData(0, 0, Constants.PictureData.Width, Constants.PictureData.Height);
@@ -25,19 +26,15 @@ function preview(iteration, outputCtx, inputImgData, spiriaTron, updateIteration
 	for (let x = 0; x < Constants.PictureData.Width; x++){
 		for(let y = 0; y < Constants.PictureData.Height; y++){
 			let rgb = spiriaTron.activate([x/Constants.PictureData.Width, y/Constants.PictureData.Height]);
-			outputImageData.data[((Constants.PictureData.Height * y) + x) * 4] = Math.ceil((rgb[0] )* 255);
-			outputImageData.data[((Constants.PictureData.Height * y) + x) * 4 + 1] = Math.ceil((rgb[1] ) * 255);
-			outputImageData.data[((Constants.PictureData.Height * y) + x) * 4 + 2] = Math.ceil((rgb[2] ) * 255);
+			outputImageData.data[((Constants.PictureData.Width * y) + x) * 4] = Math.ceil((rgb[0] )* 255);
+			outputImageData.data[((Constants.PictureData.Width * y) + x) * 4 + 1] = Math.ceil((rgb[1] ) * 255);
+			outputImageData.data[((Constants.PictureData.Width * y) + x) * 4 + 2] = Math.ceil((rgb[2] ) * 255);
 		}
 	}
 	outputCtx.putImageData(outputImageData,0,0);
-	// if(iteration < 10000){
-		requestAnimationFrame(()=>{
-			iterate(iteration, outputCtx, inputImgData, spiriaTron, updateIteration, outputData);
-		});
-	/*} else {
-		console.log('done');
-	}*/
+	requestAnimationFrame(()=>{
+		iterate(iteration, outputCtx, inputImgData, spiriaTron, updateIteration, outputData);
+	});
 }
 
 function iterate(iteration, outputCtx, inputImgData, spiriaTron, updateIteration, output){
@@ -63,7 +60,7 @@ function pixel(data,x,y){
 export function train(outputCtx, inputImgData,  imageTrueWidth, imageTrueHeight, updateIteration){
 	Constants.PictureData.Width = imageTrueWidth;
 	Constants.PictureData.Height = imageTrueHeight;
-	console.log(imageTrueWidth);
+	console.log(Constants.PictureData.Width);
 	const spiriaTron = new Architect.Perceptron(Constants.Machine.NumInputLayers, Constants.Machine.NumHiddenLayers, Constants.Machine.NumOutputLayers);
 	let iteration = 0;
 	let outputData = getData(inputImgData, outputCtx);

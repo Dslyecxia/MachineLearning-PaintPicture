@@ -2,7 +2,6 @@ import React from 'react';
 import TrainingButton from './TrainingButton';
 import IterationView from './IterationView';
 import {train} from '../../helpers/mlHelper';
-import Constants from '../../helpers/constants';
 
 
 // Picture Module
@@ -63,10 +62,10 @@ class PaintPictureComponent extends React.Component {
 		return (
 			<div>
 				<div>
-					<img src={this.props.imagePreview.file} ref="uploaded" width={Constants.PictureData.Width} />
+					<img src={this.props.imagePreview.file} ref="uploaded" width={this.props.imagePreview.width} height={this.props.imagePreview.height} />
 				</div>
 				<div>
-					<canvas ref="output" width={Constants.PictureData.Width} height={Constants.PictureData.Height}></canvas>
+					<canvas ref="output" width={this.props.imagePreview.width} height={this.props.imagePreview.height} />
 				</div>
 				<div>
 					{component}

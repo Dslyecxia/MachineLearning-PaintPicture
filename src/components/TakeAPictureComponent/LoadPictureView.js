@@ -31,7 +31,6 @@ class LoadPictureView extends React.Component {
 	}
 
 	setImage(val, image) {
-		console.log(image);
 		this.setState({
 			pictureData: {
 				file: val,

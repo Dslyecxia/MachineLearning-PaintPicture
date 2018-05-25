@@ -5,13 +5,13 @@ const Constants = {
 		Machine: 2
 	},
 	PictureData: {
-		Height: 500,
-		Width: 500,
-		Format: "image/jpeg"
+		Height: 300,
+		Width: 300,
+		Format: "image/png"
 	},
 	Machine: {
 		NumInputLayers: 2,
-		NumHiddenLayers: 15,
+		NumHiddenLayers: 30,
 		NumOutputLayers: 3
 	}
 };

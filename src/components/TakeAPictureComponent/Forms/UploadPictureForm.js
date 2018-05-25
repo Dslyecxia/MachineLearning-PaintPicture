@@ -1,5 +1,6 @@
 import React from 'react';
 import Constants from '../../../helpers/constants';
+import {resize} from '../../../helpers/imageHelper';
 
 class UploadPictureForm extends React.Component {
 	constructor(props) {
@@ -9,27 +10,25 @@ class UploadPictureForm extends React.Component {
 
 	_handleImageChange(e) {
 		e.preventDefault();
-
-		let reader = new FileReader();
+		
 		let file = e.target.files[0];
+        let self = this;
 
-		reader.onloadend = () => {
-			var image = new Image();
-			image.src = reader.result;
+	        resize(file, Constants.PictureData.Width, Constants.PictureData.Height, function (resizedDataUrl) {
+	        	var image = new Image();
+				image.src = resizedDataUrl;
 
-			image.onload = () => {
-			  	this.setState({
-			    	file: file,
-			    	imagePreviewUrl: reader.result,
-			    	image: {
-			    		height: this.height,
-			    		width: this.width
-			    	}
-			  	});
-			}
-		}
-
-		reader.readAsDataURL(file)
+				image.onload = () => {
+				  	self.setState({
+				    	file: file,
+				    	imagePreviewUrl: resizedDataUrl,
+				    	image: {
+				    		height: image.height,
+				    		width: image.width
+				    	}
+				  	});
+				}
+	        });
 	}
 
   	render() {
@@ -37,9 +36,7 @@ class UploadPictureForm extends React.Component {
 	    let $imagePreview = null;
 	    if (imagePreviewUrl) {
 	    	let image = this.state.image;
-	    	console.log(image);
-	    	let width = (image.width <= Constants.PictureData.Width) ? image.width : Constants.PictureData.Width;
-	    	$imagePreview = (<img src={imagePreviewUrl} width={width} alt="Who's this nice looking person?" />);
+	    	$imagePreview = (<img src={imagePreviewUrl} width={image.width} height={image.height} alt="Who's this nice looking person?" />);
 	    } else {
 	    	$imagePreview = (<div className="previewText">Please select an Image for Preview</div>);
 	    }
